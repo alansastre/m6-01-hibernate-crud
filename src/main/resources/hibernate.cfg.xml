@@ -23,9 +23,10 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">create</property>
         <!-- Import sql script-->
-        <property name="hibernate.hbm2ddl.import_files">data.sql</property>
+<!--         <property name="hibernate.hbm2ddl.import_files">data.sql</property> -->
 
-        <mapping class="com.example.model.Employee" />
+		<!-- modelos -->
+        <mapping class="com.example.domain.Employee" />
 
     </session-factory>
 </hibernate-configuration>
