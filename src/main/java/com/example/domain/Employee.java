@@ -66,6 +66,13 @@ public class Employee {
 	public void setMarried(Boolean married) {
 		this.married = married;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", fullName=" + fullName + ", biography=" + biography + ", married=" + married
+				+ "]";
+	}
 	
 	
 	
