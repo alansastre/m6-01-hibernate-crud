@@ -1,15 +1,23 @@
 package com.example.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Type;
 
 
 @Entity
@@ -19,17 +27,42 @@ public class Employee implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	// atributos propios
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="full_name", unique = true)
+	@Column(name="full_name", unique = true, nullable=false)
 	private String fullName;
 	
 	@Column(name="biography", length = 300)
 	private String biography;
 	
-	private Boolean married;
+	// @Type(type = "yes_no") // cambia el cómo se almacena boolean en la base de datos será char(1) por defecto era bit(1)
+	// @Type(type = "true_false") 
+	private Boolean married; 
+	
+	private Integer age;
+	
+	private Double salary;
+	
+	@Column(name="birth_date")
+	private LocalDate birthDate;
+	
+	@Column(name="register_date")
+	private LocalDateTime registerDate;
+	
+	//@Enumerated(EnumType.ORDINAL) // se almacena como número empezando en 0
+	@Enumerated(EnumType.STRING)
+	private EmployeeType type;
+	
+	@ElementCollection
+	private List<String> nicknames = new ArrayList<>();
+	 
+	// asociaciones con otras entidades
+
+	
+	// constructores
 	
 	
 	public Employee() {}
@@ -40,6 +73,23 @@ public class Employee implements Serializable{
 		this.fullName = fullName;
 		this.biography = biography;
 		this.married = married;
+	}
+	
+	
+
+
+
+	public Employee(Long id, String fullName, String biography, Boolean married, Integer age, Double salary,
+			LocalDate birthDate, LocalDateTime registerDate, EmployeeType type) {
+		this.id = id;
+		this.fullName = fullName;
+		this.biography = biography;
+		this.married = married;
+		this.age = age;
+		this.salary = salary;
+		this.birthDate = birthDate;
+		this.registerDate = registerDate;
+		this.type = type;
 	}
 
 
@@ -81,13 +131,84 @@ public class Employee implements Serializable{
 	public void setMarried(Boolean married) {
 		this.married = married;
 	}
+	
+	
+
+
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+
+
+	public LocalDateTime getRegisterDate() {
+		return registerDate;
+	}
+
+
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
+
+
+	public void setRegisterDate(LocalDateTime registerDate) {
+		this.registerDate = registerDate;
+	}
+
+	
+
+	public Integer getAge() {
+		return age;
+	}
+
+
+	public Double getSalary() {
+		return salary;
+	}
+
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+
+	public void setSalary(Double salary) {
+		this.salary = salary;
+	}
+
+	
+
+	public EmployeeType getType() {
+		return type;
+	}
+
+
+	public void setType(EmployeeType type) {
+		this.type = type;
+	}
+	
+	
+
+
+	public List<String> getNicknames() {
+		return nicknames;
+	}
+
+
+	public void setNicknames(List<String> nicknames) {
+		this.nicknames = nicknames;
+	}
 
 
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", fullName=" + fullName + ", biography=" + biography + ", married=" + married
+				+ ", age=" + age + ", salary=" + salary + ", birthDate=" + birthDate + ", registerDate=" + registerDate
 				+ "]";
 	}
+
+
+
+
 	
 	
 	

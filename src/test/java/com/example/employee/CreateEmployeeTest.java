@@ -1,11 +1,17 @@
 package com.example.employee;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.Arrays;
 
 import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
 
 import com.example.domain.Employee;
+import com.example.domain.EmployeeType;
 import com.example.util.HibernateUtil;
 
 public class CreateEmployeeTest {
@@ -16,7 +22,7 @@ public class CreateEmployeeTest {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
 		// transient entity
-		Employee employee = new Employee(null, "Usuario Hibernate", "Lorem ipsum dolor", false);
+		Employee employee = new Employee(null, "Usuario Hibernate", "Lorem ipsum dolor", true);
 		
 		session.save(employee);
 		
@@ -89,4 +95,52 @@ public class CreateEmployeeTest {
 		session.close();
 
 	}
+	
+	@Test
+	void createWithData() throws Exception {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		Employee employee = new Employee(null, "Emp", "texto", false, 25, 30000D, 
+				LocalDate.of(1990, Month.JANUARY, 24), 
+				LocalDateTime.of(2020, Month.JANUARY, 24, 17, 32, 11),
+				EmployeeType.JUNIOR
+				);
+		
+		session.beginTransaction();
+		
+		session.save(employee);
+		
+		session.getTransaction().commit();
+		
+		session.close();
+	}
+	
+	@Test
+	void testCollectionElement() throws Exception {
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Employee employee = new Employee(null, "Emp", "texto", false, 25, 30000D, 
+				LocalDate.of(1990, Month.JANUARY, 24), 
+				LocalDateTime.of(2020, Month.JANUARY, 24, 17, 32, 11),
+				EmployeeType.JUNIOR
+				);
+		
+		employee.setNicknames(Arrays.asList("mote1","mote2","mote3"));
+		
+		session.beginTransaction();
+		
+		session.save(employee);
+		
+		session.getTransaction().commit();
+		
+		session.close();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -33,6 +33,17 @@ public class DeleteEmployeeTest {
 	@Test
 	void deleteWithFind() throws Exception {
 		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Employee employee1 = session.find(Employee.class, 1L);
+		
+
+		session.beginTransaction();
+		session.delete(employee1); // lo borra correctamente 
+		
+		session.getTransaction().commit();
+		
+		session.close();
+		
 	}
 	
 	
