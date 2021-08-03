@@ -1,6 +1,7 @@
-package com.example;
+package com.example.employee;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
@@ -11,15 +12,7 @@ import org.junit.jupiter.api.Test;
 import com.example.domain.Employee;
 import com.example.util.HibernateUtil;
 
-/**
- * 		org.hibernate -- Hibernate
-		javax.persistence -- JPA
-		
-		SessionFactory
-		Session
- *
- */
-public class EmployeeTest {
+public class ReadEmployeeTest {
 
 	@Test
 	@DisplayName("Encontrar un Empleado por id")
@@ -92,13 +85,4 @@ public class EmployeeTest {
 		// 3 - Cerrar session
 		session.close();
 	}
-	
-	
-	// CRUD
-	
-	
-	
-	
-	
-	
 }

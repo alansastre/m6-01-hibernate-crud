@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,11 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 
 @Entity
+// @DynamicUpdate(value = true) // para que se actualicen unica y exclusivamente aquellos campos que han sido modificados
 @Table(name="employees")
-public class Employee {
-	
+public class Employee implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -26,6 +33,14 @@ public class Employee {
 	
 	
 	public Employee() {}
+	
+	
+	public Employee(Long id, String fullName, String biography, Boolean married) {
+		this.id = id;
+		this.fullName = fullName;
+		this.biography = biography;
+		this.married = married;
+	}
 
 
 	public Long getId() {
