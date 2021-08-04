@@ -55,6 +55,18 @@ En Spring el data.sql se inserta automáticamente, es Spring quien lo inserta.
 Angular --> API REST Controladores Java --> Servicio --> DAO
 
 
+## Métodos CRUD
+
+* find - Retrieve
+* save - Create
+* merge - Update
+* delete - Delete
+
+## Asociaciones
+
+* One To One
+
+
 
 
 
