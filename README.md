@@ -118,6 +118,20 @@ de facturación sólo puede pertenecer a un mismo usuario.
 	* BillingInfo: OneToOne
 
 
+## Frameworks:
+
+1. Spring Data JPA
+2. Hibernate: HQL, Criteria API, Caché
+3. JDBC
+4. Base de datos
+
+
+
+
+
+
+
+
 
 
 
