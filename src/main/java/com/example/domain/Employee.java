@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -79,6 +80,10 @@ public class Employee implements Serializable{
 	
 	// projects
 	@ManyToMany
+	@JoinTable(name = "employees_projects", 
+			   joinColumns = @JoinColumn(name="id_employee", referencedColumnName = "id"),
+			   inverseJoinColumns = @JoinColumn(name="id_project", referencedColumnName = "id")
+			   )
 	private List<Project> projects = new ArrayList<>();
 	
 	
@@ -239,6 +244,17 @@ public class Employee implements Serializable{
 
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+
+	
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
 	}
 
 

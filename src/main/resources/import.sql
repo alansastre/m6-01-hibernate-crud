@@ -17,3 +17,17 @@ INSERT INTO directions (city, country, postal_code, street) VALUES('Madrid', 'Sp
 INSERT INTO employees(full_name, biography, married, id_company, id_direction) values ('Employee1 con Empresa', 'Lorem ipsum dolor', true, 1, 2);
 -- one to many: añado un empleado mas para verificar que one company tiene many empleados:
 INSERT INTO employees(full_name, biography, married, id_company) values ('Employee2 con Empresa', 'Lorem ipsum dolor', true, 1);
+-- many to many:
+INSERT INTO employees(full_name, biography, married) values ('Employee1 Many To Many', 'Lorem ipsum dolor', true);
+INSERT INTO employees(full_name, biography, married) values ('Employee2 Many To Many', 'Lorem ipsum dolor', true);
+INSERT INTO projects (prefix, title) VALUES('PRJ1', 'Project Many to many 1');
+INSERT INTO projects (prefix, title) VALUES('PRJ2', 'Project Many to many 2');
+INSERT INTO projects (prefix, title) VALUES('PRJ2', 'Project Many to many 3');
+-- project 1
+INSERT INTO employees_projects (id_employee, id_project) VALUES(7, 1);
+INSERT INTO employees_projects (id_employee, id_project) VALUES(8, 1);
+-- project 2
+INSERT INTO employees_projects (id_employee, id_project) VALUES(7, 2);
+INSERT INTO employees_projects (id_employee, id_project) VALUES(8, 2);
+-- project 3
+INSERT INTO employees_projects (id_employee, id_project) VALUES(7, 3);

@@ -1,11 +1,14 @@
 package com.example.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +27,8 @@ public class Project implements Serializable{
 	private String prefix;
 	
 	// asociaciones
+	@ManyToMany(mappedBy = "projects")
+	private List<Employee> employees = new ArrayList<>();
 
 	public Project() {
 	}
@@ -50,6 +55,14 @@ public class Project implements Serializable{
 	}
 	public void setPrefix(String prefix) {
 		this.prefix = prefix;
+	}
+	
+	
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
 	}
 	@Override
 	public String toString() {

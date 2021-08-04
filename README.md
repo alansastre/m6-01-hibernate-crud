@@ -84,8 +84,38 @@ Recuperar una empresa:
 
 
 
+## Proyecto Hibernate
 
 
+* TagColor: una enumeración, podrá ser de tipo BLUE, YELLOW, GREEN, RED.
+
+* Tag: representa una entidad etiqueta con los atributos id, nombre, color (enum TagColor, almacenada como string en base de datos)
+
+* User: representa una entidad usuario con los siguientes atributos id, nombre,
+apellido, dni, si está activo sí o no, fecha de nacimiento
+
+* Task: representa una entidad tarea, con los atributos id, título, descripción,
+finalizada (sí o no), fecha de entrega LocalDate).
+
+* BillingInfo: representa la información de facturación de un usuario
+
+
+### Asociaciones:
+
+1. Un usuario tiene muchas tareas, una tarea sólo puede pertenecer a un mismo
+usuario a la vez.
+	* User: One To Many
+	* Task: Many To One
+
+2. Una tarea puede tener muchas etiquetas, una etiqueta puede estar en más de
+una tarea a la vez.
+	* Task: ManyToMany
+	* Tag: ManyToMany
+
+3. Un usuario tiene una información de facturación BillingInfo y una información
+de facturación sólo puede pertenecer a un mismo usuario.
+	* User: OneToOne
+	* BillingInfo: OneToOne
 
 
 
