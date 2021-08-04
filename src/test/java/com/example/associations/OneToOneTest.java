@@ -9,6 +9,9 @@ import com.example.domain.Direction;
 import com.example.domain.Employee;
 import com.example.util.HibernateUtil;
 
+/**
+ * Asociación Employee - Direction
+ */
 public class OneToOneTest {
 
 	@Test

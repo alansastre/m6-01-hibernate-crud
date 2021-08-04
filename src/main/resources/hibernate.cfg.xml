@@ -29,6 +29,7 @@
 		<!-- modelos -->
         <mapping class="com.example.domain.Employee" />
         <mapping class="com.example.domain.Direction" />
+        <mapping class="com.example.domain.Company" />
 
     </session-factory>
 </hibernate-configuration>

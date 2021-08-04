@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -67,6 +68,10 @@ public class Employee implements Serializable{
 	@OneToOne // owner
 	@JoinColumn(name = "id_direction", foreignKey = @ForeignKey(name = "fk_employee_direction")) // opcional
 	private Direction direction;
+	
+	// company
+	@ManyToOne
+	private Company company;
 	
 	
 	
@@ -216,6 +221,17 @@ public class Employee implements Serializable{
 
 	public void setDirection(Direction direction) {
 		this.direction = direction;
+	}
+
+	
+
+	public Company getCompany() {
+		return company;
+	}
+
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 
