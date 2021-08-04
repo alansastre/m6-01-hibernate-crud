@@ -30,6 +30,7 @@
         <mapping class="com.example.domain.Employee" />
         <mapping class="com.example.domain.Direction" />
         <mapping class="com.example.domain.Company" />
+        <mapping class="com.example.domain.Project" />
 
     </session-factory>
 </hibernate-configuration>

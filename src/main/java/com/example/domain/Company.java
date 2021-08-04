@@ -2,12 +2,16 @@ package com.example.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +33,12 @@ public class Company implements Serializable{
 	private LocalDate startDate;
 	
 	private Double capital;
+	
+	// asociaciones
+	@OneToMany(mappedBy = "company") // no es owner, el mapeo se establece en la otra clase
+	// @OneToMany(mappedBy = "company", fetch = FetchType.EAGER) // Por defecto es inicialización Lazy
+	private List<Employee> employees = new ArrayList<>(); // Por defecto es inicialización Lazy
+	
 	
 	public Company() {}
 
@@ -78,6 +88,16 @@ public class Company implements Serializable{
 
 	public void setCapital(Double capital) {
 		this.capital = capital;
+	}
+	
+	
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
 	}
 
 	@Override

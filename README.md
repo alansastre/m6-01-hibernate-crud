@@ -67,6 +67,23 @@ Angular --> API REST Controladores Java --> Servicio --> DAO
 * One To One
 
 
+## Inicialización tardía: Lazy
+
+Recuperar una empresa:
+
+1. fetch = FetchType.EAGER:
+	* Se recuperan los employees siempre
+	
+2. Dejar fetch lazy (Por defecto) y recuperar la empresa sin los empleados (find normal)
+	* Consultas de cif, name, capital
+	
+3. Dejar fetch lazy (Por defecto) y ecuperar la empresa con los empleados: (HQL join fetch employees)
+	* Consultas de los empleados + informacion de la empresa
+	
+4. (Otra posibilidad)  Abrir nueva sesión, refrescar la company, ejecutar getEmployees()
+
+
+
 
 
 

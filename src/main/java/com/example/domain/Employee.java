@@ -11,11 +11,13 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -64,15 +66,20 @@ public class Employee implements Serializable{
 	private List<String> nicknames = new ArrayList<>();
 	 
 	// asociaciones con otras entidades
-	// Uno a Uno
+	
+	// direction
 	@OneToOne // owner
 	@JoinColumn(name = "id_direction", foreignKey = @ForeignKey(name = "fk_employee_direction")) // opcional
 	private Direction direction;
 	
 	// company
-	@ManyToOne
+	@ManyToOne // owner 
+	@JoinColumn(name = "id_company", foreignKey = @ForeignKey(name = "fk_employee_company"))
 	private Company company;
 	
+	// projects
+	@ManyToMany
+	private List<Project> projects = new ArrayList<>();
 	
 	
 	// constructores
