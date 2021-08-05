@@ -5,16 +5,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.example.dao.EmployeeDAO;
 import com.example.dao.EmployeeDAOImpl;
+import com.example.domain.Company;
 import com.example.domain.Employee;
 import com.example.util.HibernateUtil;
 
@@ -192,6 +193,82 @@ public class HQLTest {
 		List<Employee> employees = employeeDAO.findAllGte18();
 		assertEquals(4L, employees.size());
 	}
+	
+	
+	@Test
+	public void findCompanyLazy() throws Exception {
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Company company1 = session.find(Company.class, 1L);
+		session.close();
+		
+		// System.out.println(company1.getEmployees()); // Lazy Initialization Exception
+	}
+	
+	
+	@Test
+	public void findCompanyEagerEmployeesHQL() throws Exception {
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		String hql = "from Company c join fetch c.employees where c.id = :id";
+		
+		Query<Company> query = session.createQuery(hql, Company.class);
+		query.setParameter("id", 1L);
+		
+		Company company1 = query.getSingleResult();
+		
+		session.close();
+		
+		System.out.println(company1.getEmployees());
+
+		
+	}
+	
+	@Test
+	public void findCompanyEagerEmployeesInHQL() throws Exception {
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		String hql = "from Company c join fetch c.employees e where e.id in :ids";
+		
+		Query<Company> query = session.createQuery(hql, Company.class);
+		query.setParameter("ids", Arrays.asList(500L, 600L, 700L));
+		
+		Company company1 = query.getSingleResult();
+		
+		session.close();
+		
+		System.out.println(company1.getEmployees());
+
+		
+	}
+	
+	
+	@Test
+	public void findCompaniesEagerHQL() throws Exception {
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		String hql = "select distinct c from Company c join fetch c.employees";
+		
+		Query<Company> query = session.createQuery(hql, Company.class);
+		
+		List<Company> companies = query.getResultList();
+		
+		session.close();
+		
+		for (Company company : companies) 
+			System.out.println(company.getEmployees());
+		
+	}
+	
+
+	
+	
+	
+	
 	
 	
 	

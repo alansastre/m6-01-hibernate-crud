@@ -31,7 +31,7 @@ Se les reconoce por llevar la anotación @Entity o estar configuradas a través 
 
 ## Importar datos
 
-1. Crear archivo import.sql en src/main/resources (Se ejecuta automáticamente)
+1. Crear archivo import.sql en src/main/resources (Se importa automáticamente sin añadir nada en la configuracion)
 2. Crear archivo data.sql en src/main/resources (Hay que especificarlo en .cfg.xml para que lo inserte) en la propiedad hibernate.hbm2ddl.import_file si se lee este entonces no se lee el import.sql automáticamente
 
 En Spring el data.sql se inserta automáticamente, es Spring quien lo inserta.

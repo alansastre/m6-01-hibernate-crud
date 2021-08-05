@@ -70,7 +70,7 @@ public class OneToMany {
 	}
 	
 	@Test
-	@DisplayName("Sin EAGER y cerrando sesion se produce LaxyInitializationException")
+	@DisplayName("Sin EAGER y cerrando sesion se produce LazyInitializationException")
 	void findCompany2() throws Exception {
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
