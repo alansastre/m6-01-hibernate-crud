@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,10 +37,17 @@ public class Company implements Serializable{
 	private Double capital;
 	
 	// asociaciones
+	
 	@OneToMany(mappedBy = "company") // no es owner, el mapeo se establece en la otra clase
 	// @OneToMany(mappedBy = "company", fetch = FetchType.EAGER) // Por defecto es inicialización Lazy
 	private List<Employee> employees = new ArrayList<>(); // Por defecto es inicialización Lazy
 	
+	@OneToMany(orphanRemoval = true) // si owner
+	@JoinTable(name = "companies_creditcards", 
+	   joinColumns = @JoinColumn(name="id_company", referencedColumnName = "id"),
+	   inverseJoinColumns = @JoinColumn(name="id_credit_card", referencedColumnName = "id")
+	   )
+	private List<CreditCard> creditCards = new ArrayList<>();
 	
 	public Company() {}
 
@@ -98,6 +107,15 @@ public class Company implements Serializable{
 
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
+	}
+
+	
+	public List<CreditCard> getCreditCards() {
+		return creditCards;
+	}
+
+	public void setCreditCards(List<CreditCard> creditCards) {
+		this.creditCards = creditCards;
 	}
 
 	@Override

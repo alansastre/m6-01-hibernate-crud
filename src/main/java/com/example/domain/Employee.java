@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -22,6 +23,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -71,8 +73,9 @@ public class Employee implements Serializable{
 	 
 	// asociaciones con otras entidades
 	
-	// direction
-	@OneToOne // owner
+	// direction // owner
+	@OneToOne 
+	// @OneToOne(cascade = CascadeType.ALL) // owner
 	@JoinColumn(name = "id_direction", foreignKey = @ForeignKey(name = "fk_employee_direction")) // opcional
 	private Direction direction;
 	
@@ -260,6 +263,11 @@ public class Employee implements Serializable{
 		this.projects = projects;
 	}
 
+	// customizar el ciclo de vida antes y despues de cada operacion CRUD
+//	@PreRemove
+//	private void predelete() {
+//
+//	}
 
 	@Override
 	public String toString() {

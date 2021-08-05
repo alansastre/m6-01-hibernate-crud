@@ -98,6 +98,60 @@ public class ManyToMany {
 		
 	}
 	
+	// Many To Many: Employee (Owner) - Project (Not Owner)
+	
+	
+	@Test
+	void manyToMany1() throws Exception {
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Employee employee = new Employee(null, "Experimento ManyToMany", "Lorem ipsum dolor", true);
+		Project project1 = new Project(null, "ProjectExp1", "PRJ1");
+		Project project2 = new Project(null, "ProjectExp2", "PRJ2");
+		Project project3 = new Project(null, "ProjectExp3", "PRJ3");
+		
+		// guardo 
+		session.beginTransaction();
+		
+		session.save(employee);
+		session.save(project1);
+		session.save(project2);
+		session.save(project3);
+		
+		session.getTransaction().commit();
+		
+		// Prueba 1: desde empleado asigno un proyecto
+		session.beginTransaction();
+		
+		employee.getProjects().add(project1);
+		session.save(employee);
+		
+		session.getTransaction().commit();
+		
+		// Prueba 2: desde proyecto asigno un empleado
+//		session.beginTransaction();
+//		
+//		project1.getEmployees().add(employee);
+//		session.save(project1); // no es owner POR TANTO NO SE GUARDA!!!!!!
+//		
+//		session.getTransaction().commit();
+		
+		
+		session.close();
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

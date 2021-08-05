@@ -104,8 +104,8 @@ finalizada (sí o no), fecha de entrega LocalDate).
 
 1. Un usuario tiene muchas tareas, una tarea sólo puede pertenecer a un mismo
 usuario a la vez.
-	* User: One To Many
-	* Task: Many To One
+	* User: One To Many (mappedBy = "user")
+	* Task: Many To One (owner, tiene columna user_id)
 
 2. Una tarea puede tener muchas etiquetas, una etiqueta puede estar en más de
 una tarea a la vez.

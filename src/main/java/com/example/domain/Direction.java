@@ -2,6 +2,7 @@ package com.example.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +34,7 @@ public class Direction implements Serializable{
 	
 	// not owner
 	@OneToOne(mappedBy = "direction") // bidireccional: opcional
+	//@OneToOne(mappedBy = "direction", cascade = CascadeType.REMOVE) // bidireccional: opcional
 	private Employee employee;
 
 	public Direction() {}

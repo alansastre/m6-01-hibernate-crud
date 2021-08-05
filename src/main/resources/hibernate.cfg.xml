@@ -31,6 +31,7 @@
         <mapping class="com.example.domain.Direction" />
         <mapping class="com.example.domain.Company" />
         <mapping class="com.example.domain.Project" />
+        <mapping class="com.example.domain.CreditCard" />
 
     </session-factory>
 </hibernate-configuration>
