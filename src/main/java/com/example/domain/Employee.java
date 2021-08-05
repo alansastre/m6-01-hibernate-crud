@@ -20,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,6 +31,8 @@ import org.hibernate.annotations.Type;
 @Entity
 // @DynamicUpdate(value = true) // para que se actualicen unica y exclusivamente aquellos campos que han sido modificados
 @Table(name="employees")
+@NamedQuery(name = "findAllEmployees", query = "from Employee")
+@NamedQuery(name = "findAllEmployeesGte18", query = "from Employee where age >= 18")
 public class Employee implements Serializable{
 
 	private static final long serialVersionUID = 1L;

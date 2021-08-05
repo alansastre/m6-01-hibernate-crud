@@ -10,6 +10,8 @@ import com.example.util.HibernateUtil;
 
 public class EmployeeDAOImpl implements EmployeeDAO{
 
+	private static final String HQL_FIND_ALL = "from Employee";
+
 	@Override
 	public Employee findOne(Long id) {
 
@@ -28,7 +30,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
 				
-		List<Employee> employees = session.createQuery("from Employee", Employee.class).list();
+		List<Employee> employees = session.createQuery(HQL_FIND_ALL, Employee.class).list();
 		
 		session.close();
 		
@@ -108,6 +110,18 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		finally {
 			session.close();
 		}		
+	}
+
+	@Override
+	public List<Employee> findAllGte18() {
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		List<Employee> employees = session.createNamedQuery("findAllEmployeesGte18").getResultList();
+		
+		session.close();
+		
+		return employees;
 	}
 	
 
